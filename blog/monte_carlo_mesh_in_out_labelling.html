@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monte Carlo Mesh In/Out Labelling</title>
+
+    <style>
+        /* https://stackoverflow.com/a/7025783/8094047 */
+        html * {
+            color: #000 !important;
+            font-family: Arial !important;
+            /* font-weight: lighter !important; */
+        }
+
+        code {
+            font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif !important;
+        }
+
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 10pt;
+            margin-bottom: 10pt;
+            width: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Monte Carlo Mesh In/Out Labelling</h1>
+    <h3>Introduction</h3>
+    <p>
+        Mesh in/out labelling is very crucial in various mesh processing algorithms, like boolean and re-meshing,
+    </p>
+    <p>
+        the following blog post describes a definition for the problem, and from that definition we derive a series of
+        algorithms each one addresses an issue of the one before it, until we arrive at the final solution,
+        which is fast and robust against difficulties like holes, non-manifoldness and self-inclusion, the method also
+        does not depend on mesh normals, and can be accelerated on GPUs or multithreaded CPUs for executing on many
+        query points against millions of polygons.
+    </p>
+    <p>
+        While there are existing solutions for this problem (like winding numbers and its derivations/approximations),
+        the method presented here aims to provide a strong alternative that is easier to implement, robust and fast.
+    </p>
+    <p>C++ code is provided at the end.</p>
+    <h3>A definition of the problem</h3>
+    <p>
+        Given a triangle soup (S) and a point (P), determine if the point is enclosed by the
+        volume bounded by the triangle soup
+    </p>
+    <p>
+        We define a point that is enclosed by the volume bounded by triangle soup as: a point which is not visible from
+        any possible view direction, we will see in a minute that our definition will implicitly change as we improve
+        upon the first algorithm.
+    </p>
+
+    <h3>Algorithm 1</h3>
+    <p>From the previous definition, we can derive the first version of the algorithm:
+    <pre><code>
+    def is_inside(mesh, point):
+        for every possible view direction:
+            if the point is visible:
+                return False
+        return True
+</code></pre>
+    </p>
+    <p>
+        On physical hardware considering all possible view directions is impossible, so we use a Monte Carlo method to
+        sample random directions,
+        thus the algorithm becomes
+    </p>
+    <pre><code>
+    directions = generate_uniform_random_full_sphere(NUM_SAMPLES)
+    def is_inside(mesh, point):
+        for d in directions:
+            if not is_ray_blocked_by_mesh(point, d):
+                return False
+        return True
+</code></pre>
+    <p>
+        We cast rays originating from the query point, and check if they hit the mesh or not,
+        if a ray does not hit the mesh, this means that this point is visible from that direction, which means we
+        consider the point to be outside the mesh by our definition earlier, if all rays were exhausted we consider the
+        point as inside.
+    </p>
+    <p>
+        Generating random directions uniformly is already a well known and studied problem, and is solved by generating
+        2D
+        uniform random values and transforming them,
+        you can find the method described <a
+            href="https://www.pbr-book.org/3ed-2018/Monte_Carlo_Integration/2D_Sampling_with_Multidimensional_Transformations#:~:text=Vector3f-,UniformSampleSphere,-(const%20Point2f%20%26u">here</a>
+        in the famous PBR Book,
+    </p>
+    <p>
+        Ray-mesh intersection testing is also a well known problem and is solved by using a <a
+            href="https://pbr-book.org/3ed-2018/Primitives_and_Intersection_Acceleration/Bounding_Volume_Hierarchies">Bounding
+            Volume Hierarchy</a> of the mesh.
+    </p>
+
+    <h3>Problems with algorithm 1</h3>
+    The first algorithm has a fundamental problem, it does not deal well with holes and some configurations of non
+    convex meshes.
+    the hole problem is easy to imagine, some rays will escape even if we humans consider the point to be inside the
+    volume of the mesh,
+    but the non convexity needs an illustration:
+    <img src="false_negative1.svg">
+
+    <br><br>
+    In order to solve the problem with algorithm 1, we make the observation that if the mesh contains holes, some
+    percentage of the rays will hit the mesh, and some won't, this is true for both points that are inside or outside by
+    our definition, this will lead to a problem we will see in a second,
+    <br><br> but anyways to solve the issue, we use a threshold, we allow a percentage of rays to be visible, and thus
+    we
+    tolerate holes,
+
+    <!-- <pre>
+        <code>
+    def is_inside(mesh, point, threshold=.5):
+        return number_of_blocked_rays(mesh, point) > (threshold * number_of_all_rays)
+        </code>
+    </pre> -->
+
+
+    <p>
+        This method is easy to implement (very easy if you already have a BVH implementation like Intel's Embree or CGAL
+        or your own), it is also very paralleziable on CPUs and GPUs, which is great because if we are already in a
+        boolean pipeline then we might have a BVH already build to resolve mesh intersections, which we can use to query
+        rays for this method, the bvh could also be constructed and queried on the GPU which might allow for realtime
+        boolean operations on millions of polygons, some past papers already proposed solutions for real-time booleans
+        such as <a href="https://www.cs.rice.edu/~jwarren/papers/dualcontour.pdf">Dual contouring of hermite data</a>,
+        but it uses a different technique, and might be more complex to implement.
+    </p>
+</body>
+
+</html>
