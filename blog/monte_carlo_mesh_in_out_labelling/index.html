@@ -32,7 +32,13 @@
 
 <body>
     <h1 style="text-align: center; font-weight: normal;">Monte Carlo Mesh In/Out Labelling</h1>
-    <img src="bunny_points.png">
+    <figure>
+        <img src="bunny_points.png">
+        <figcaption style="text-align: center;">
+            Stanford Bunny mesh (contains holes) filled with points filtered from ~1 million grid points using Monte
+            Carlo Mesh In/Out Labelling
+        </figcaption>
+    </figure>
     <h3>Introduction</h3>
     <p>
         Mesh in/out labelling is very crucial in various mesh processing algorithms, like boolean and re-meshing,
@@ -148,20 +154,24 @@
 
     <p>Now at this point, we may think that a single ray with even-odd rule is enough, but this has some problems, if
         the mesh has holes, then inside points might be labelled incorrectly as outside, also depending on the choice of
-        direction and mesh orientation, the same point might sometimes be labelled as inside and sometimes as outside, </p>
+        direction and mesh orientation, the same point might sometimes be labelled as inside and sometimes as outside,
+    </p>
     <p>
         Thus we employ the ideas from algorithm 1 to the even-odd rule, that is we shoot in uniform random directions,
-        and we use a threshold to tolerate holes, we arrive at a hybrid algorithm, there's a small catch that we
-        will get to later though, for now the algorithm is as follows:
+        and we use a threshold to tolerate holes, we arrive at a hybrid algorithm that practically solves all our
+        issues:
     </p>
 
     <pre><code>
-    def is_inside(mesh, point):
+    def is_inside(mesh, point, threshold=.5):
         number_of_odd_crossings = 0
         for d in directions:
             if num_crossings(mesh, point, d) is odd:
                 number_of_odd_crossings += 1
+        return number_of_odd_crossings > (threshold * number_of_all_rays)
 </code></pre>
+
+    <!-- TODO: results, future work -->
 
     <p>
         This method is easy to implement (very easy if you already have a BVH implementation like Intel's Embree or CGAL
