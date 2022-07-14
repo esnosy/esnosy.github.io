@@ -56,7 +56,8 @@
     </p>
     <p>
         While there are existing solutions for this problem (like winding numbers and its derivations/approximations),
-        the method presented here aims to provide a strong alternative that is easier to implement, more robust and faster.
+        the method presented here aims to provide a strong alternative that is easier to implement, more robust and
+        faster.
     </p>
     <p>C++ code is provided at the end.</p>
 
@@ -101,7 +102,8 @@
         point as inside.
     </p>
     <p>
-        Generating random directions uniformly is already a well known and studied problem, and can be solved by generating
+        Generating random directions uniformly is already a well known and studied problem, and can be solved by
+        generating
         2D
         uniform random values and transforming them,
         you can find the method described <a
@@ -119,7 +121,7 @@
     as outside, and in some configurations of non-convex meshes, it labels points that should be outside as inside,
     the problem with holes is easy to imagine, some rays will escape through the hole,
     to understand the problem with non-convexity, consider the following illustration:
-    <img src="false_negative1.svg">
+    <img style="width: 25%;" src="false_negative1.svg">
 
     <p>
         The blue point is clearly outside the mesh, but would be labelled as inside, because all the rays
@@ -145,7 +147,7 @@
         illustration:
     </p>
 
-    <img src="even_odd.svg">
+    <img style="width: 25%;" src="even_odd.svg">
     <p>
         It is observed that any ray from a point that is outside will cross the mesh in either an even number of
         crossings (we will not think about mesh corners right now), or a zero number of crossings,
