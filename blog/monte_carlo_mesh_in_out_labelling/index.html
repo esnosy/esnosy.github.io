@@ -43,7 +43,7 @@
     </p>
     <p>
         We start with a definition for the problem, and from that definition we derive a series of
-        algorithms each one addresses an issue of the one before it, until we arrive at the final solution,
+        algorithms each one addresses the issues of the ones before it, until we arrive at the final solution,
         which is fast and robust against difficulties like holes, non-manifoldness and self-inclusion, the method also
         does not depend on mesh normals, and can be accelerated on GPUs or multithreaded CPUs for executing on many
         query points against millions of polygons.
@@ -53,6 +53,7 @@
         the method presented here aims to provide a strong alternative that is easier to implement, robust and fast.
     </p>
     <p>C++ code is provided at the end.</p>
+
     <h3>A definition of the problem</h3>
     <p>
         Given a triangle soup (S) and a point (P), determine if the point is enclosed by the
