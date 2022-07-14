@@ -16,9 +16,9 @@
         }
 
         /* body { */
-            /* margin-left: 10em; */
-            /* margin-right: 10em; */
-            /* width: 8em */
+        /* margin-left: 10em; */
+        /* margin-right: 10em; */
+        /* width: 8em */
         /* } */
 
         pre {
@@ -79,7 +79,8 @@
         query points against millions of polygons.
     </p>
     <p>
-        While there are existing solutions for this problem (like winding numbers and its derivations/approximations),
+        While there are existing solutions for this problem like winding numbers, its derivations/approximations and
+        Signed Distance Field computation to name a few,
         the method presented here aims to provide a strong alternative that is easier to implement, more robust and
         faster.
     </p>
@@ -180,7 +181,8 @@
         direction and mesh orientation, the same point might sometimes be labelled as inside and sometimes as outside,
     </p>
     <p>
-        Thus we employ the ideas from algorithm 1 to the even-odd rule, that is we shoot multiple rays in uniform random directions,
+        Thus we employ the ideas from algorithm 1 to the even-odd rule, that is we shoot multiple rays in uniform random
+        directions,
         and we use a threshold to tolerate holes, we arrive at a hybrid algorithm that practically solves all our
         issues:
     </p>
