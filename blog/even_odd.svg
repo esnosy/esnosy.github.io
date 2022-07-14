@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="112.1666mm"
+   height="62.564507mm"
+   viewBox="0 0 112.1666 62.564507"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2 (dc2aedaf03, 2022-05-15)"
+   sodipodi:docname="drawing.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="1.4912879"
+     inkscape:cx="331.59258"
+     inkscape:cy="322.54001"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2">
+    <marker
+       style="overflow:visible"
+       id="Arrow2"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Arrow2"
+       markerWidth="7.6999998"
+       markerHeight="5.5999999"
+       viewBox="0 0 7.7 5.6"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(0.7)"
+         d="M -2,-4 9,0 -2,4 c 2,-2.33 2,-5.66 0,-8 z"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:none"
+         id="arrow2L" />
+    </marker>
+    <pattern
+       inkscape:collect="always"
+       xlink:href="#Strips1_1"
+       id="pattern3597"
+       patternTransform="matrix(0.84306073,0.99803026,-2.0823098,1.7589788,0,0)" />
+    <pattern
+       inkscape:collect="always"
+       patternUnits="userSpaceOnUse"
+       width="2"
+       height="1"
+       patternTransform="translate(0,0) scale(10,10)"
+       id="Strips1_1"
+       inkscape:stockid="Stripes 1:1"
+       inkscape:isstock="true">
+      <rect
+         style="fill:black;stroke:none"
+         x="0"
+         y="-0.5"
+         width="1"
+         height="2"
+         id="rect1931" />
+    </pattern>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-55.919355,-69.225805)">
+    <circle
+       style="fill:#000bba;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
+       id="path3223"
+       cx="77.532257"
+       cy="105.56451"
+       r="2.3064516" />
+    <path
+       style="display:none;fill:url(#pattern3597);fill-opacity:1;stroke:#d80000;stroke-width:1;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
+       d="M 90.66129,94.209676 H 64.403226 V 123.30645 H 138.74193 V 78.064515 H 63.516128 v -8.33871 H 147.6129 V 131.29032 H 56.419354 V 86.580643 H 90.66129 Z"
+       id="path3593"
+       sodipodi:nodetypes="ccccccccccccc"
+       inkscape:export-filename="false_negative1.svg"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:url(#pattern3597);fill-opacity:1;stroke:#d80000;stroke-width:1;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
+       d="M 90.66129,94.209676 H 64.403226 V 123.30645 H 138.74193 V 78.064515 H 63.516128 v -8.33871 H 147.6129 V 131.29032 H 56.419354 V 86.580643 H 90.66129 Z"
+       id="path3742"
+       sodipodi:nodetypes="ccccccccccccc"
+       inkscape:export-filename="false_negative1.svg"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:#a4a4a4;fill-opacity:1;stroke:#0b00ff;stroke-width:1;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2);paint-order:normal"
+       d="M 77.508005,105.66937 162.08712,78.534471"
+       id="path3798"
+       sodipodi:nodetypes="cc" />
+  </g>
+</svg>
