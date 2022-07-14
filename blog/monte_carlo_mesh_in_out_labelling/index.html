@@ -15,7 +15,31 @@
             /* font-weight: lighter !important; */
         }
 
+        body {
+            margin-left: 10em;
+            margin-right: 10em;
+            /* width: 8em */
+        }
+
+        pre {
+            display: block;
+            white-space: pre-wrap;
+            /* Since CSS 2.1 */
+            white-space: -moz-pre-wrap;
+            /* Mozilla, since 1999 */
+            white-space: -pre-wrap;
+            /* Opera 4-6 */
+            white-space: -o-pre-wrap;
+            /* Opera 7 */
+            word-wrap: break-word;
+            /* Internet Explorer 5.5+ */
+        }
+
         code {
+            font-size: 105%;
+            padding: 2pt;
+            display: block;
+            background-color: #f1f1f1;
             font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif !important;
         }
 
@@ -74,8 +98,7 @@
 
     <h3>Algorithm 1</h3>
     <p>From the previous definition, we can derive the first version of the algorithm:
-    <pre><code>
-    def is_inside(mesh, point):
+    <pre><code>    def is_inside(mesh, point):
         for every possible view direction:
             if the point is visible:
                 return False
@@ -87,8 +110,7 @@
         sample random directions,
         thus the algorithm becomes
     </p>
-    <pre><code>
-    directions = generate_uniform_random_full_sphere(NUM_SAMPLES)
+    <pre><code>    directions = generate_uniform_random_full_sphere(NUM_SAMPLES)
     def is_inside(mesh, point):
         for d in directions:
             if not is_ray_blocked_by_mesh(point, d):
@@ -132,8 +154,7 @@
 
     <p>We address the hole problem first, to solve it we simply use a threshold, this will allow some percentage of rays
         to escape, effectively increasing the hole tolerance, thus our algorithm becomes:</p>
-    <pre><code>
-    def is_inside(mesh, point, threshold=.5):
+    <pre><code>    def is_inside(mesh, point, threshold=.5):
         return number_of_blocked_rays(mesh, point) > (threshold * number_of_all_rays)
 </code></pre>
     <p>
@@ -164,8 +185,7 @@
         issues:
     </p>
 
-    <pre><code>
-    def is_inside(mesh, point, threshold=.5):
+    <pre><code>    def is_inside(mesh, point, threshold=.5):
         number_of_odd_crossings = 0
         for d in directions:
             if num_crossings(mesh, point, d) is odd:
