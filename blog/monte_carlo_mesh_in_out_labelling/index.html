@@ -118,7 +118,7 @@
         sample random directions,
         thus the algorithm becomes
     </p>
-    <pre><code>    directions = generate_uniform_random_full_sphere(NUM_SAMPLES)
+    <pre><code>    directions = generate_random_directions(number_of_samples)
     def is_inside(mesh, point):
         for d in directions:
             if not is_ray_blocked_by_mesh(point, d):
