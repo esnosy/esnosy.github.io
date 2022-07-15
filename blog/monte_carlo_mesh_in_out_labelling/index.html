@@ -204,51 +204,59 @@
         return number_of_odd_crossings > (threshold * number_of_all_rays)
 </code></pre>
 
-    <!-- TODO: results, future work -->
+    <!-- TODO: results -->
 
     <h3>Pros and cons</h3>
     <p>One of the key advantages of this algorithm is that it is easy to implement, no need for complex formulas, just
         count ray crossings and compare against threshold.</p>
 
     <p>Another advantage is that it does not depend on mesh normals, and works very well at the same time in a really
-        nice balance, this leads us to an issue though...,</p>
+        nice balance.</p>
 
-    <p>because we don't use mesh normals, if the threshold is high enough with a mesh that contains large enough holes,
-        outside points will start to be classified as inside, however this should only happen if the mesh contains holes
-        and the threshold is high enough.</p>
+    <p>An important note is, because we don't use mesh normals, if the hole tolerance is high enough with a mesh that
+        contains large enough holes,
+        the non convexity problem strikes again,
+        and some outside points will start to be classified as inside, however this should only happen if the mesh
+        contains
+        large enough holes and the hole tolerance is high enough.</p>
 
-    <p>One solution to the previous problem is to consider mesh normals, and use the <a
+    <p>One solution to the previous note is to consider mesh normals, and use the <a
             href="https://en.wikipedia.org/wiki/Nonzero-rule">Non-zero rule</a>,
         by calculating the sign of the dot product of ray direction and triangle normal at each hit.
     </p>
 
-    <p> Another consideration is performance, even with Intel Embree, a straight forward implementation is ~2x slower
-        than libigl::fast_winding_numbers </p>
-
+    <p> Another note is execution speed, comparing an implementation against libigl::fast_winding_numbers,
+        fast_winding_numbers was faster on one instance by ~2x, this should be studied more though before drawing
+        conclusions.
+    </p>
 
     <h3>End notes</h3>
     <p>
         In the end, Monte Carlo Mesh In/Out Labelling is easier to implement than other methods, while delivering
         similar accuracy, and without relying on mesh normals, it is also very paralleziable on CPUs and GPUs, one might
-        also make use of raytracing hardware, also the BVH could also be constructed and queried on the GPU (now that I
-        think of it, fast winding numbers can also make advantage of this, but still more complex to implement) which
-        might
-        allow
-        for realtime
-        boolean operations on millions of polygons, some past papers already proposed solutions for real-time booleans
+        also make use of raytracing hardware, the BVH could also be constructed and queried on the GPU, which might
+        allow for realtime boolean operations on millions of polygons, some past papers already proposed solutions for
+        real-time boolean mesh operations
         such as <a href="https://www.cs.rice.edu/~jwarren/papers/dualcontour.pdf">Dual contouring of hermite data</a>,
         but it uses a different technique, also more recently <a href="https://arxiv.org/abs/2205.14151">Interactive and
-            Robust Mesh Booleans</a> and might be more complex to implement.
+            Robust Mesh Booleans</a> but might be more complex to implement.
     </p>
 
     <h3>Appendix</h3>
-    <p>
-        <a href="https://github.com/iyadahmed/meshprocessing/tree/main/apps/mcpip_embree">MCPIP Embree</a>,
-        implementation of the method using Intel Embree BVH.
-    </p>
-    <p>
-        <a href="https://www.dgp.toronto.edu/projects/fast-winding-numbers/">Fast Winding Numbers</a>
-    </p>
+    <ul>
+
+        <li>
+            <a href="https://github.com/iyadahmed/meshprocessing/tree/main/apps/mcpip_embree">MCPIP Embree</a>,
+            implementation of the method using Intel Embree BVH.
+        </li>
+        <li>
+            <a href="https://developer.nvidia.com/blog/thinking-parallel-part-ii-tree-traversal-gpu/">Thinking Parallel,
+                Part II: Tree Traversal on the GPU</a>
+        </li>
+        <li>
+            <a href="https://www.dgp.toronto.edu/projects/fast-winding-numbers/">Fast Winding Numbers</a>
+        </li>
+    </ul>
 </body>
 
 </html>
