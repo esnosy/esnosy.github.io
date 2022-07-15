@@ -168,7 +168,9 @@
     </p>
     <h3>Algorithm 2</h3>
     <p>
-        To solve the problems with algorithm 1, we consider the even-odd rule or the "number of crossings" algorithm,
+        To solve the problems with algorithm 1, we consider the <a
+            href="https://en.wikipedia.org/wiki/Point_in_polygon#Ray_casting_algorithm">even-odd</a> rule or the "number
+        of crossings" algorithm,
         which is a well known and mathematically proved algorithm, to understand it, consider the following
         illustration:
     </p>
@@ -201,14 +203,47 @@
 
     <!-- TODO: results, future work -->
 
+    <h3>Pros and cons</h3>
+    <p>One of the key advantages of this algorithm is that it is easy to implement, no need for complex formulas, just
+        count ray crossings and compare against threshold.</p>
+
+    <p>Another advantage is that it does not depend on mesh normals, and works very well at the same time in a really
+        nice balance, this leads us to an issue though...,</p>
+
+    <p>because we don't use mesh normals, if the threshold is high enough with a mesh that contains large enough holes,
+        outside points will start to be classified as inside, however this should only happen if the mesh contains holes
+        and the threshold is high enough.</p>
+
+    <p>One solution to the previous problem is to consider mesh normals, and count crossings based on the dor product of
+        each ray hit and the triangle it hits, in essence the <a
+            href="https://en.wikipedia.org/wiki/Nonzero-rule">Non-zero rule.</a></p>
+
+    <p> Another consideration is performance, even with Intel Embree, a straight forward implementation is ~2x slower
+        than libigl::fast_winding_numbers </p>
+
+
+    <h3>End notes</h3>
     <p>
-        This method is easy to implement (very easy if you already have a BVH implementation like Intel's Embree or CGAL
-        or your own), it is also very paralleziable on CPUs and GPUs, which is great because if we are already in a
-        boolean pipeline then we might have a BVH already build to resolve mesh intersections, which we can use to query
-        rays for this method, the bvh could also be constructed and queried on the GPU which might allow for realtime
+        In the end, Monte Carlo Mesh In/Out Labelling is easier to implement than other methods, while delivering
+        similar accuracy, and without relying on mesh normals, it is also very paralleziable on CPUs and GPUs, one might
+        also make use of raytracing hardware, also the BVH could also be constructed and queried on the GPU (now that I
+        think of it, fast winding numbers can also make advantage of this, but still more complex to implement) which
+        might
+        allow
+        for realtime
         boolean operations on millions of polygons, some past papers already proposed solutions for real-time booleans
         such as <a href="https://www.cs.rice.edu/~jwarren/papers/dualcontour.pdf">Dual contouring of hermite data</a>,
-        but it uses a different technique, and might be more complex to implement.
+        but it uses a different technique, also more recently <a href="https://arxiv.org/abs/2205.14151">Interactive and
+            Robust Mesh Booleans</a> and might be more complex to implement.
+    </p>
+
+    <h3>Appendix</h3>
+    <p>
+        <a href="https://github.com/iyadahmed/meshprocessing/tree/main/apps/mcpip_embree">MCPIP Embree</a>,
+        implementation of the method using Intel Embree BVH.
+    </p>
+    <p>
+        <a href="https://www.dgp.toronto.edu/projects/fast-winding-numbers/">Fast Winding Numbers</a>
     </p>
 </body>
 
