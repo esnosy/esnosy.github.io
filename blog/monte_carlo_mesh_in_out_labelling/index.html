@@ -84,20 +84,23 @@
         query points against millions of polygons.
     </p>
     <p>
-        While there are existing solutions for this problem like winding numbers, its derivations/approximations and
-        Signed Distance Field computation to name a few, the method described here is easier to implement and does not
+        While there are existing solutions for this problem -winding numbers, its derivations/approximations and
+        Signed Distance Field computation to name a few-, the method described here is easier to implement and does not
         depend on mesh normals.
     </p>
-    <p>C++ code is provided at the end.</p>
+    <p>Link to implementation is provided at the end.</p>
 
     <h3>A definition of the problem</h3>
     <p>
-        Given a triangle soup and a point, determine if the point is enclosed by the
-        volume bounded by the triangle soup.
+        Given a triangle soup and a point, determine if the point is contained in the
+        volume bounded by the triangle soup surface,
     </p>
     <p>
-        We define a point that is enclosed by the volume bounded by triangle soup as: a point which is not visible from
-        any possible view direction, we will see in a minute that our definition will implicitly change as we improve
+        we define such point as: a point which is not visible from
+        any possible view direction.
+    </p>
+
+    <p> We will see in a minute that our definition will implicitly change as we improve
         upon the first algorithm.
     </p>
 
@@ -177,8 +180,8 @@
 
     <img style="width: 20%;" src="even_odd.svg">
     <p>
-        It is observed that any ray from a point that is outside will cross the mesh in either an even number of
-        crossings (we will not think about mesh corners right now), or a zero number of crossings,
+        It is observed that any ray from a point that is outside will cross the mesh surface in either an even number of
+        crossings (we will not think about corners right now), or a zero number of crossings,
         while an inside point will have an odd number of crossings,
     </p>
 
@@ -214,9 +217,10 @@
         outside points will start to be classified as inside, however this should only happen if the mesh contains holes
         and the threshold is high enough.</p>
 
-    <p>One solution to the previous problem is to consider mesh normals, and count crossings based on the dor product of
-        each ray hit and the triangle it hits, in essence the <a
-            href="https://en.wikipedia.org/wiki/Nonzero-rule">Non-zero rule.</a></p>
+    <p>One solution to the previous problem is to consider mesh normals, and use the <a
+            href="https://en.wikipedia.org/wiki/Nonzero-rule">Non-zero rule</a>,
+        by calculating the sign of the dot product of ray direction and triangle normal at each hit.
+    </p>
 
     <p> Another consideration is performance, even with Intel Embree, a straight forward implementation is ~2x slower
         than libigl::fast_winding_numbers </p>
