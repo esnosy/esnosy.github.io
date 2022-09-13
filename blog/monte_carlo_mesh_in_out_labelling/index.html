@@ -74,7 +74,7 @@
     </p>
     <p>
         The following blog post presents a method for in/out labelling of points that is fast, robust, easy to implement
-        and paralleziable.
+        and parallelize.
     </p>
     <p>
         We start with a definition of the problem, and from that definition we derive a series of
@@ -233,8 +233,8 @@
     <h3>End notes</h3>
     <p>
         In the end, Monte Carlo Mesh In/Out Labelling is easier to implement than other methods, while delivering
-        similar accuracy, and without relying on mesh normals, it is also very paralleziable on CPUs and GPUs, one might
-        also make use of raytracing hardware, the BVH could also be constructed and queried on the GPU, which might
+        similar accuracy, and without relying on mesh normals, it is also very parallelizable on CPUs and GPUs, one might
+        also make use of ray tracing hardware, the BVH could also be constructed and queried on the GPU, which might
         allow for realtime boolean operations on millions of polygons, some past papers already proposed solutions for
         real-time boolean mesh operations
         such as <a href="https://www.cs.rice.edu/~jwarren/papers/dualcontour.pdf">Dual contouring of hermite data</a>,
@@ -244,7 +244,6 @@
 
     <h3>Appendix</h3>
     <ul>
-
         <li>
             <a href="https://github.com/iyadahmed/meshprocessing/tree/main/apps/mcpip_embree">MCPIP Embree</a>,
             implementation of the method using Intel Embree BVH.
