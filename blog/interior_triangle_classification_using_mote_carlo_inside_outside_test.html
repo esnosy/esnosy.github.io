@@ -40,7 +40,7 @@ def is_interior_triangle(bvh, triangle):
             neg_num_rays += 1
     
     is_pos_interior = pos_odd_crossings > (threshold * pos_num_rays)
-    is_neg_interior = number_of_odd_crossings > (threshold * number_of_all_rays)
+    is_neg_interior = neg_odd_crossings > (threshold * neg_num_rays)
 
     return is_pos_interior and is_neg_interior
     </code></pre>
