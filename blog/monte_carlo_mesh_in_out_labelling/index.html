@@ -10,51 +10,7 @@
     <meta property="og:image"
         content="https://iyadahmed.github.io/blog/monte_carlo_mesh_in_out_labelling/bunny_points_thumb.png" />
 
-    <style>
-        /* https://stackoverflow.com/a/7025783/8094047 */
-        html * {
-            color: #000 !important;
-            font-family: Arial !important;
-            /* font-weight: lighter !important; */
-        }
-
-        /* body { */
-        /* margin-left: 10em; */
-        /* margin-right: 10em; */
-        /* width: 8em */
-        /* } */
-
-        pre {
-            display: block;
-            white-space: pre-wrap;
-            /* Since CSS 2.1 */
-            white-space: -moz-pre-wrap;
-            /* Mozilla, since 1999 */
-            white-space: -pre-wrap;
-            /* Opera 4-6 */
-            white-space: -o-pre-wrap;
-            /* Opera 7 */
-            word-wrap: break-word;
-            /* Internet Explorer 5.5+ */
-        }
-
-        code {
-            font-size: 105%;
-            padding: 2pt;
-            display: block;
-            background-color: #f1f1f1;
-            font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif !important;
-        }
-
-        img {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            margin-top: 10pt;
-            margin-bottom: 10pt;
-            width: 50%;
-        }
-    </style>
+    <link rel="stylesheet" href="../blog_post.css">
 </head>
 
 <body>
@@ -233,7 +189,8 @@
     <h3>End notes</h3>
     <p>
         In the end, Monte Carlo Mesh In/Out Labelling is easier to implement than other methods, while delivering
-        similar accuracy, and without relying on mesh normals, it is also very parallelizable on CPUs and GPUs, one might
+        similar accuracy, and without relying on mesh normals, it is also very parallelizable on CPUs and GPUs, one
+        might
         also make use of ray tracing hardware, the BVH could also be constructed and queried on the GPU, which might
         allow for realtime boolean operations on millions of polygons, some past papers already proposed solutions for
         real-time boolean mesh operations
