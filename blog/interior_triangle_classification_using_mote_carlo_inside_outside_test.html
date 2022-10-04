@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interior Triangle Classification using Monte-Carlo Mesh Inside/Outside Test</title>
+    <link rel="stylesheet" href="./blog_post.css">
+
+</head>
+
+<body>
+    <h1 style="text-align: center; font-weight: normal;">Interior Triangle Classification using Monte-Carlo Mesh
+        Inside/Outside Test</h1>
+    <h3 style="text-align: center; font-weight: normal;">Author: <a href="https://www.github.com/iyadahmed">Iyad
+            Ahmed</a></h3>
+
+    <h4>Pseudo-code</h4>
+    <pre><code>
+directions = generate_uniform_random_full_sphere_directions(number_of_samples)
+def is_interior_triangle(bvh, triangle):
+    pos_normal = triangle.calc_normal()
+
+    pos_num_rays = 0  # number of all rays in the positive normal hemisphere
+    pos_odd_crossings = 0  # number of rays that crossed the mesh an odd number of times
+
+    neg_num_rays = 0
+    neg_odd_crossings = 0
+
+    for d in directions:
+        n = bvh.number_of_crossings(ray_origin=triangle.center, ray_direction=d)
+        if d.dot(pos_normal) > 0.0:
+            if n is odd:
+                pos_odd_crossings += 1
+            pos_num_rays += 1
+        else:
+            if n is odd:
+                neg_odd_crossings += 1
+            neg_num_rays += 1
+    
+    is_pos_interior = pos_odd_crossings > (threshold * pos_num_rays)
+    is_neg_interior = number_of_odd_crossings > (threshold * number_of_all_rays)
+
+    return is_pos_interior and is_neg_interior
+    </code></pre>
+
+    <h4>Notes:</h4>
+    <ul>
+        <li>
+            Using triangle center as a ray origin means trouble when the mesh contains self intersections, however, this
+            is is intended to be used in a mesh boolean pipeline, so mesh intersection should be already be resolved
+            before this step
+        </li>
+        <li>
+            Based on: <a href="./monte_carlo_mesh_in_out_labelling/index.html">Monte Carlo Point Inside/Outside Test</a>
+        </li>
+    </ul>
+</body>
+
+</html>
