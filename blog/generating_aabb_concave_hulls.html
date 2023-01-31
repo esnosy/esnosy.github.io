@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generating Axis-Aligned Concave Hulls</title>
+    <link rel="stylesheet" href="./blog_post.css">
+
+</head>
+
+<body>
+    <h1 style="text-align: center; font-weight: normal;">Generating Axis-Aligned Concave Hulls</h1>
+    <h3 style="text-align: center; font-weight: normal;">Author: <a href="https://www.github.com/iyadahmed">Iyad
+            Ahmed</a></h3>
+
+    <h4>Pseudo-code</h4>
+    <pre><code>
+Generate 2D outlines of mesh projections on X, Y and Z planes
+
+Extrude each outline infinitely (or just enough so that they all intersect, use the dimensions of axis-aligned bounding box as extrusion lengths)
+
+The concanve hull is the intersection of all extruded parts
+    </code></pre>
+
+    <h4>Notes:</h4>
+    <ul>
+        <li> 2D outline of mesh projection should be computable with backface culling (with Z-buffer for "smooth"
+            culling)
+        </li>
+        <li>
+            Hopefully the culling and the boolean intersection can be both done on the GPU
+        </li>
+    </ul>
+</body>
+
+</html>
