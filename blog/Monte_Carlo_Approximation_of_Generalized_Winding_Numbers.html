@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monte Carlo Approximation of Generalized Winding Numbers</title>
+</head>
+
+<body>
+    <h1>Draft</h1>
+    <h1 style="text-align: center;">Monte Carlo Approximation of Generalized Winding Numbers for Possibly Non-Manifold
+        and Open Meshes</h1>
+    <h2 style="text-align: center;">Author: <a href="../contact.html">Iyad Ahmed</a></h2>
+    <h2>Abstract</h2>
+    <p>
+        Generalized Winding Numbers (GWNs) are really useful for determining if a point is inside a polygon and various
+        other
+        uses, however, calculating exact GWN values has O(n<sup>2</sup>) time complexity. This article presents a Monte
+        Carlo method for approximating GWN values in O(log(n)) time.
+    </p>
+    <h2>Introduction</h2>
+    <h3>O(n<sup>2</sup>) method for calculating GWN</h3>
+    <p>
+        In R<sup>2</sup>, the GWN of a point <i>p</i> with respect to a polygon <i>P</i> is defined as the sum of the
+        signed angles at the point for every triangle that is formed using the point and every edge in the polygon (edge
+        direction matters).
+    </p>
+    <p>
+        In R<sup>3</sup>, solid angles at the point for every tetrahedron that is formed using the point and every
+        triangle of the mesh are summed instead, in this case the winding order of the vertices of every one of those
+        triangles matter.
+    </p>
+    <h3>Alternative methods for calculating GWN in 2D and 3D for closed surfaces</h3>
+    <h3>There are two main methods:</h3>
+    <h3>The even-odd rule</h3>
+    <p>
+        In the even-odd rule method, we intersect a ray from the
+        query point into the mesh and counts the number of intersections, if the number of intersections is odd, then we
+        consider the point to be inside the mesh, if it is even, then we consider the point to be outside.
+    </p>
+    <h3>The non-zero rule</h3>
+    <p>
+        In the non-zero rule, the winding order of mesh or polygon matters, because we intersect a ray from the query
+        point, and at every intersection, we compare the direction of the ray with the direction of the normal of the
+        edge, if mesh is 2D, or triangle if mesh is 3D, if those two directions have a positive dot product, then we
+        give this intersection a value of +1, if the dot product is negative, we give the intersection a value of -1,
+        summing all the
+        intersection values results in either a zero sum or a non-zero sum, points that have a non-zero sum are
+        considered to be inside the mesh, otherwise they are considered to be outside.
+    </p>
+    <h2>Method</h2>
+    <ol>
+        <li>
+            
+        </li>
+    </ol>
+</body>
+
+</html>
